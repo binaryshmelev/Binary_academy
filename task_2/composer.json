@@ -1,0 +1,12 @@
+{
+    "name": "ShmelevSergey/Binary_academy",
+    "description": "Home Work #2",
+    "type": "project",
+    "version": "1.0.0",
+    "require": {
+        "php": "~5.5.0|~5.6.0"
+    },
+    "autoload": {
+        "classmap": ["classes/"]
+    }
+}
