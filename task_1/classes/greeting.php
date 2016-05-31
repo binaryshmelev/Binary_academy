@@ -1,5 +1,4 @@
 <?php
-require __DIR__ . '\vendor\autoload.php';
 
 class Greeting {
     use RandomQuote;
@@ -8,5 +7,3 @@ class Greeting {
         echo "Hi, {$name}! There is a new quote for you: {$this->getRandomQuote()}";
     }
 }
-
-$test_greeting = (new Greeting)->say('Student');
