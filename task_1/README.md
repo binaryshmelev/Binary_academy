@@ -14,14 +14,16 @@ Used files:
  - marvel/NewYork/ant_man.php
  - marvel/NewYork/iron_man.php
 
-2. To check second part about Random Quotes need run "greeting.php"
+2. To check second part about Random Quotes need run "index_greeting.php"
 Used files:
- - greeting.php
+ - index_greeting.php
+ - classes/greeting.php
  - classes/randomquote.php
 
-3. To check third part and see result of triangle numbers generator need run "generator.php"
+3. To check third part and see result of triangle numbers generator need run "index_generator.php"
 Used files:
- - generator.php
+ - index_generator.php
+ - classes/generator.php
 
 4. In "index.php" you can see result of start Development Server and also you can run this script
 Used files:
