@@ -22,13 +22,22 @@ class Controller
     private $error = 'Oops! Something went wrong, try again.';
 
     /**
+     * Constructor of class
+     * @param int $total_floors
+     * @param int $total_humans
+     * @throws \exception
+     */
+    public function __construct($total_floors = 9, $total_humans = 4) {
+        $this->elevator = new \classes\Elevator($total_floors, $total_humans);
+    }
+
+    /**
      * Start script
      */
     public function start()
     {
         $this->clear_console();
         $this->help();
-        $this->elevator = new \classes\Elevator();
 
         while (!$this->end_script) {
             $this->action();
@@ -69,43 +78,30 @@ class Controller
         } while (empty($action));
 
         $action = explode(' ', $action);
+        $class = '\classes\\' . $action[0];
 
         try {
+            if ((in_array($action[0], array('launch', 'add', 'remove'))) &&
+                (intval($action[1]) == 0)) {
+                throw new \Exception( $this->error . PHP_EOL . PHP_EOL );
+            }
+
             switch ($action[0]) {
-                case 'status' : $this->elevator->get_condition();
-                                break;
-
-                case 'launch' : if (intval($action[1]) == 0) {
-                                    echo $this->error . PHP_EOL . PHP_EOL;
-                                } else {
-                                    $this->elevator->elevator_launch(intval($action[1]));
-                                }
-                                break;
-
-                case 'add' : if (intval($action[1]) == 0) {
-                                echo $this->error . PHP_EOL . PHP_EOL;
-                             } else {
-                                $this->elevator->add_humans(intval($action[1]));
-                             }
-                             break;
-
-                case 'remove' :  if (intval($action[1]) == 0) {
-                                    echo $this->error . PHP_EOL . PHP_EOL;
-                                 } else {
-                                    $this->elevator->remove_humans(intval($action[1]));
-                                 }
-                                 break;
-
                 case '?' : $this->help();
-                           break;
+                    break;
 
                 case 'clear' : $this->clear_console();
-                               break;
+                    break;
 
                 case 'end' : $this->end_script = true;
-                             break;
+                    break;
 
-                default : echo 'Oops! Something went wrong, try again' . PHP_EOL . PHP_EOL;
+                default : if (class_exists($class)) {
+                    $command = new $class($this->elevator);
+                    $command->execute(intval($action[1]));
+                } else {
+                    echo $this->error . PHP_EOL . PHP_EOL;
+                }
             }
         } catch (\Exception $e) {
             echo $e->getMessage() . PHP_EOL;

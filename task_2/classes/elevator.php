@@ -33,7 +33,7 @@ class Elevator {
      * @param int $total_humans
      * @throws \exception
      */
-    public function __construct($total_floors = 9, $total_humans = 4) {
+    public function __construct($total_floors, $total_humans) {
         if (!is_int($total_floors)) {
             throw new \exception('Total floors must be an integer type.' . PHP_EOL);
         }

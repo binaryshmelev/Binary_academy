@@ -8,4 +8,9 @@ $baseDir = dirname($vendorDir);
 return array(
     'classes\\Controller' => $baseDir . '/classes/controller.php',
     'classes\\Elevator' => $baseDir . '/classes/elevator.php',
+    'classes\\ElevatorCommand' => $baseDir . '/classes/interface_command.php',
+    'classes\\add' => $baseDir . '/classes/add_humans.php',
+    'classes\\launch' => $baseDir . '/classes/elevator_launch.php',
+    'classes\\remove' => $baseDir . '/classes/remove_humans.php',
+    'classes\\status' => $baseDir . '/classes/get_condition.php',
 );
