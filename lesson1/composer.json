@@ -1,0 +1,12 @@
+{
+    "name": "ShmelevSergey/Binary_academy",
+    "description": "Lesson #1",
+    "type": "project",
+    "version": "1.0.0",
+    "require": {
+        "php": "^7.0"
+    },
+    "autoload": {
+        "classmap": ["classes/"]
+    }
+}
