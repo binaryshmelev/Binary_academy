@@ -1,0 +1,1 @@
+# Home Work for Lesson #2 on Academy Binary-Studio. Laravel 5.2
