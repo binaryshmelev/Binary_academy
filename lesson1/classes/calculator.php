@@ -5,10 +5,12 @@ namespace classes;
 
 class Calculator {
     /**
-     * Logging operations
+     * Logging
      */
-    private static function logging() {
-        return new class {
+    private $logging;
+
+    public function __construct() {
+        $this->logging = new class {
             public function save(array $data){
                 $filename = "logs.txt";
                 $line = date('d.m.Y H:i:s');
@@ -28,7 +30,7 @@ class Calculator {
      */
     public function addition(int $first_operand, int $second_operand) : int {
         $result = $first_operand + $second_operand;
-        self::logging()->save(['Addition', $first_operand, $second_operand, $result]);
+        $this->logging->save(['Addition', $first_operand, $second_operand, $result]);
         return $result;
     }
 
@@ -37,7 +39,7 @@ class Calculator {
      */
     public function subtract(int $first_operand, int $second_operand) : int {
         $result = $first_operand - $second_operand;
-        self::logging()->save(['Subtract', $first_operand, $second_operand, $result]);
+        $this->logging->save(['Subtract', $first_operand, $second_operand, $result]);
         return $result;
     }
 
@@ -46,7 +48,7 @@ class Calculator {
      */
     public function multiplication(int $first_operand, int $second_operand) : int {
         $result = $first_operand * $second_operand;
-        self::logging()->save(['Multiplication', $first_operand, $second_operand, $result]);
+        $this->logging->save(['Multiplication', $first_operand, $second_operand, $result]);
         return $result;
     }
 
@@ -54,12 +56,8 @@ class Calculator {
      * Division numbers
      */
     public function division(int $first_operand, int $second_operand) : int {
-        if ($second_operand === 0 ) {
-            throw new \DivisionByZeroError();
-        }
-
         $result = intdiv($first_operand, $second_operand);
-        self::logging()->save(['Division', $first_operand, $second_operand, $result]);
+        $this->logging->save(['Division', $first_operand, $second_operand, $result]);
         return $result;
     }
 
@@ -68,7 +66,7 @@ class Calculator {
      */
     public function involution(int $first_operand) : int {
         $result = 2 ** $first_operand;
-        self::logging()->save(['Involution', $first_operand, $result]);
+        $this->logging->save(['Involution', $first_operand, $result]);
         return $result;
     }
 }
