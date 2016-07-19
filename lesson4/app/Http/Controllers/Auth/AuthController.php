@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Contracts\Config;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -79,7 +79,7 @@ class AuthController extends Controller
 
     public function getSocialRedirect( $provider )
     {
-        $providerKey = \Config::get('services.' . $provider);
+        $providerKey = Config::get('services.' . $provider);
         if(empty($providerKey))
             return view('pages.status')
                 ->with('error','No such provider');
@@ -119,10 +119,6 @@ class AuthController extends Controller
                 $socialData->provider= $provider;
                 $newSocialUser->social()->save($socialData);
 
-                // Add role
-                $role = Role::whereName('user')->first();
-                $newSocialUser->assignRole($role);
-
                 $socialUser = $newSocialUser;
             }
             else
@@ -133,23 +129,8 @@ class AuthController extends Controller
 
         }
 
-//        $authUser = $this->findOrCreateUser($user);
-//        Auth::login($authUser, true);
 
         Auth::login($socialUser, true);
         return Redirect::to('/');
-        /*$this->auth->login($socialUser, true);
-
-        if( $this->auth->user()->hasRole('user'))
-        {
-            return redirect()->route('user.home');
-        }
-
-        if( $this->auth->user()->hasRole('administrator'))
-        {
-            return redirect()->route('admin.home');
-        }*/
-
-        return \App::abort(500);
     }
 }
