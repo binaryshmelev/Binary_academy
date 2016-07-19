@@ -56,8 +56,8 @@ class UserController extends Controller
         }
 
         $rules = [
-            'firstname' => 'required|alpha',
-            'lastname' => 'required|alpha',
+            'firstname' => 'required',
+            'lastname' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required',
         ];
@@ -127,8 +127,8 @@ class UserController extends Controller
 
         $user = User::find($id);
         $rules = [
-            'firstname' => 'required|alpha',
-            'lastname' => 'required|alpha',
+            'firstname' => 'required',
+            'lastname' => 'required',
         ];
 
         if (!empty($request->book)) {
