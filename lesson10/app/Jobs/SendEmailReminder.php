@@ -46,6 +46,8 @@ class SendEmailReminder extends Job implements SelfHandling, ShouldQueue {
                 $message->from('binarytestssn@gmail.com');
                 $message->to($this->email)->subject('Reminder');
             });
+
+            $this->release(604800); //every week
         }
     }
 }
